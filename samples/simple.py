@@ -8,6 +8,9 @@ import dirt
 import dirt.matrices as matrices
 import dirt.lighting as lighting
 
+import matplotlib.image as mpimg
+import matplotlib.pyplot as plt
+
 
 frame_width, frame_height = 640, 480
 
@@ -73,14 +76,10 @@ def main():
         width=frame_width, height=frame_height, channels=3
     )
 
-    session = tf.Session()
-    with session.as_default():
-
-        pixels_eval = pixels.eval()
-        cv2.imshow('simple.py', pixels_eval[:, :, (2, 1, 0)])
-        cv2.waitKey(0)
-
+    pixels_eval = pixels.numpy()
+    plt.figure(figsize=(18, 16), dpi= 80, facecolor='w', edgecolor='k')
+    plt.imshow(pixels_eval[:, :, (2, 1, 0)])
+    plt.show()
 
 if __name__ == '__main__':
     main()
-

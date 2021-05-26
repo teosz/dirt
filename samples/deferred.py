@@ -76,7 +76,7 @@ def main():
         diffuse_contribution = tf.reshape(diffuse_contribution, [frame_height, frame_width, 3])
 
         # Calculate a white specular (Phong) lighting component
-        camera_position_world = tf.matrix_inverse(view_matrix)[3, :3]
+        camera_position_world = tf.linalg.inv(view_matrix)[3, :3]
         specular_contribution = lighting.specular_directional(
             tf.reshape(positions, [-1, 3]),
             tf.reshape(normals, [-1, 3]),
@@ -129,4 +129,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

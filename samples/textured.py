@@ -5,6 +5,9 @@ import os
 import numpy as np
 import tensorflow as tf
 
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+
 import dirt
 import dirt.matrices as matrices
 import dirt.lighting as lighting
@@ -139,7 +142,7 @@ def main():
         pixels = (diffuse_contribution + ambient_contribution) * mask + [0., 0., 0.3] * (1. - mask)
 
         return pixels
-    
+
     # Render the G-buffer channels (mask, UVs, and normals at each pixel), then perform the deferred shading calculation
     # In general, any tensor required by shader_fn and wrt which we need derivatives should be included in shader_additional_inputs;
     # although in this example they are constant, we pass the texture and lighting direction through this route as an illustration
@@ -170,4 +173,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
